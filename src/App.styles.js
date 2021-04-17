@@ -1,118 +1,144 @@
 import styled from 'styled-components'
 
+export const COLORS = {
+    primary: '#017acb',
+    secondary: '',
+    accent: '#02CA9F',
+    gray: '#CCC',
+    darkGray: '#727272',
+}
+
 export const Wrapper = styled.div`
     height: 100%;
-    padding: 16px 15%;
-    box-sizing: border-box;
+    padding: 2rem 15% 6rem;
     overflow: auto;
     user-select: none;
 
-    .todo-container {
-        columns: 4 160px;
+    @media screen and (max-width: 480px) {
+        padding: 2rem 2rem 6rem;
+    }
 
-        @media (max-width: 1023px) {
-            column-width: 168px;
+    .todo-container {
+        columns: 4;
+
+        @media screen and (max-width: 1024px) {
+            columns: 3;
         }
         
-        @media (max-width: 800px) {
-            column-width: 157px;
+        @media screen and (max-width: 768px) {
+            columns: 2;
         }
         
-        @media (max-width: 719px) {
-            column-width: 160px;
+        @media screen and (max-width: 480px) {
+            columns: 1;
+        }
+    }
+
+    .search-icon {
+        color: ${COLORS.primary};
+    }
+
+    .add-icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: ${COLORS.primary};
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.20);
+        cursor: pointer;
+        position: fixed;
+        right: 15%;
+        bottom: 3rem;
+    }
+
+    .clear-icon {
+        padding: 8px;
+        margin: 6px;
+        font-size: 1.25rem;
+        float: right;
+        cursor: pointer;
+        color: ${COLORS.primary};
+        background-color: transparent;
+    }
+
+    .hover-effect {
+        position: relative;
+
+        &:hover::before {
+            width: 100%;
+            height: 100%;
         }
         
-        @media (max-width: 479px) {
-            column-width: 300px;
+        &::before {
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            content: '';
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%,-50%);
+            transition: all 0.2s;
         }
+    }
+`;
+
+export const Heading = styled.h1`
+    margin: 0;
+    font-size: 1.75rem;
+    color: ${COLORS.primary};
+    display: flex;
+    align-items: center;
+
+    span {
+        margin-left: 1rem;
+    }
+`;
+
+export const Navbar = styled.nav`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    gap: 1rem;
+
+    @media screen and (min-width: 768px) {
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
     }
 `;
 
 export const SearchBar = styled.div`
-    height: 50px;
-    margin-bottom: 16px;
+    height: 3rem;
+    min-width: 100%;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    border-radius: 0.75rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+
+    @media screen and (min-width: 768px) {
+        min-width: 20rem;
+    }
 `;
 
 export const SearchInput = styled.input`
-    height: 60%;
-    margin: 9px 0;
-    width: calc(100% - 110px);
-    font-size: 16px;
+    height: 100%;
+    padding: 0.5rem 0;
+    width: calc(100% - 6rem);
+    font-size: 1rem;
     outline: 0;
     border: 0;
-`;
-
-export const ClearBtn = styled.button`
-    height: 100%;
-    width: 50px;
-    border: 0;
-    margin: 0;
-    outline: 0;
-    padding: 0;
-    float: right;
-    font-size: 20px;
-    cursor: pointer;
-    color: #0075ff;
-    background-color: transparent;
-    position: relative;
-    
-    &:hover:after {
-        width: 80%;
-        height: 80%;
-        top: 10%;
-        left: 10%;
-    }
-    
-    &:after {
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        content: '';
-        background-color: rgba(0, 0, 0, 0.12);
-        display: inline-block;
-        position: absolute;
-        border-radius: 50%;
-        transition: all 0.2s;
-    }
-`;
-
-export const SearchIcon = styled.i`
-    height: 100%;
-    width: 50px;
-    font-size: 20px;
-    color: #0075ff;
     vertical-align: top;
-    padding: 15px;
-    box-sizing: border-box;
-`;
-
-export const AddTask = styled.button`
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 50%;
-    border: 0;
-    outline: 0;
-    color: #0075ff;
-    background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.23);
-    cursor: pointer;
-    font-size: 20px;
-    position: fixed;
-    right: 15%;
-    bottom: 16px;
 `;
 
 export const NoListMsg = styled.p`
     position: absolute;
     width: 100%;
     left: 0;
+    top: 45%;
     text-align: center;
-    font-size: 20px;
-    padding: 20px 0;
-    color: #8c8c8c;
+    font-size: 1.25rem;
+    margin: 0;
+    color: ${COLORS.darkGray};
+    padding: 0 15%;
 `;

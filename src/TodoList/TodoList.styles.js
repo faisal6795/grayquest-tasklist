@@ -1,13 +1,13 @@
 import styled from 'styled-components';
+import { COLORS } from '../App.styles';
 
 export const Container = styled.div`
     position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 8px;
+    padding: 1.25rem 1.25rem 0.75rem;
+    border-radius: 0.5rem;
     background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-    margin: 8px 0;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    margin-bottom: 1rem;
     display: inline-block;
     vertical-align: top;
     width: 100%;
@@ -15,117 +15,71 @@ export const Container = styled.div`
     &.hide {
         display: none;
     }
+
+    .edit-icon, .delete-icon {
+        float: right;
+        cursor: pointer;
+        color: ${COLORS.primary};
+        border: 1px solid ${COLORS.gray};
+        border-radius: 50%;
+        margin-left: 0.5rem;
+    }
+
+    .delete-icon {
+        margin-right: -0.5rem;
+    }
+
+    .add-icon-small {
+        padding: 0;
+        font-size: 1rem;
+        color: ${COLORS.primary};
+        margin: 0 0.1rem;
+    }
+
+    .done-icon {
+        border-radius: 50%;
+        background-color: ${COLORS.primary};
+        color: #fff;
+        box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
+        cursor: pointer;
+        float: right;
+        font-weight: bold;
+    }
 `;
 
 export const EditTitle = styled.input`
     width: 100%;
     border: 0;
     outline: 0;
-    font-size: 16px;
-    margin-bottom: 11px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    padding: 0;
 `;
 
 export const Title = styled.p`
     margin-top: 0;
-    font-weight: 500;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 `;
 
-export const Body = styled.div``;
+export const Body = styled.div`
+    margin-bottom: 0.5rem;
+`;
 
-export const Button = styled.button`
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
+export const AddItem = styled.button`
+    display: inline-flex;
+    align-items: center;
+    background: none;
     border: 0;
     outline: 0;
-    margin: 0;
-    margin-bottom: 8px;
-    vertical-align: top;
-    color: #0075ff;
-    background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.23);
-    cursor: pointer;
-    font-size: 14px;
-    float: right;
-`;
-
-export const AddTodo = styled.button`
-    background-color: transparent;
-    color: #0075ff;
-    border: 0;
     padding: 0;
-    outline: 0;
-    font-size: 14px;
-    width: 100%;
-    text-align: left;
+    margin-top: 0.5rem;
     cursor: pointer;
 
-    &:after {
-        content: 'Add Item';
-        font-family: sans-serif;
-        font-weight: 500;
-        margin-left: 12px;
+    span {
+        font-size: 0.875rem;
+        line-height: 1;
+        color: ${COLORS.primary};
     }
 `;
-
-export const Options = styled.div`
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #505050;
-    font-size: 14px;
-    width: 16px;
-    text-align: center;
-    height: 20px;
-    line-height: 20px;
-    cursor: pointer;
-`;
-
-export const BtnWrapper = styled.div`
-    position: absolute;
-    z-index: 1;
-    top: 16px;
-    right: 16px;
-    width: 64px;
-    box-sizing: border-box;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.23);
-    animation: animate-wrapper 0.2s linear;
-
-    @keyframes animate-wrapper {
-        from {
-            width: 0;
-        }
-    }
-`;
-
-export const OptionButton = styled.button`
-    display: inline-block;
-    width: 100%;
-    background-color: #fff;
-    border: 0;
-    outline: 0;
-    margin: 0;
-    height: 30px;
-    text-align: left;
-    padding: 0 12px;
-    cursor: pointer;
-    animation: animate-button 0.2s linear;
-
-    @keyframes animate-button {
-        from {
-            width: 0;
-            height: 0;
-            font-size: 0;
-            padding: 0;
-        }
-    }
-    
-    &:hover {
-        background-color: #ddd;
-    }
-`;
-
-export const EditBtn = styled(OptionButton)``;
-
-export const DeleteBtn = styled(OptionButton)``;
