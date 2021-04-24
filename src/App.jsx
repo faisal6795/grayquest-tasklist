@@ -36,15 +36,29 @@ function App() {
 
 	function saveBtnClicked(id, title, todoList) {
 		const temp = { id, title, todoList };
+		if (title === "" && !todoList.length) {
+			setListToShow(mainList);
+			return;
+		}
 		if (id > counter) {
 			dispatch({ type: 'ADD_LIST', value: temp });
 			dispatch({ type: 'COUNTER', value: id });
 		} else {
-			dispatch({
-				type: 'UPDATE_LIST',
-				value: temp
-			});
+			updateList(temp);
 		}
+	}
+
+	function updateList({ id, title, todoList }) {
+		const uncheckedList = todoList.filter(item => !item.checked),
+			checkedList = todoList.filter(item => item.checked),
+			updatedList = [...uncheckedList, ...checkedList],
+			temp = { id, title, todoList: updatedList };
+
+		setListToShow(mainList.map(item => item.id === temp.id ? temp : item));
+		dispatch({
+			type: 'UPDATE_LIST',
+			value: temp
+		});
 	}
 
 	function deleteBtnClicked(id) {
@@ -60,7 +74,7 @@ function App() {
 	}
 
 	function getListToShow() {
-		return listToShow.map(item => <TodoList key={item.id} id={item.id} title={item.title} todoList={item.todoList} saveClicked={saveBtnClicked} deleteClicked={deleteBtnClicked} />);
+		return listToShow.map(item => <TodoList key={item.id} id={item.id} title={item.title} todoList={item.todoList} saveClicked={saveBtnClicked} deleteClicked={deleteBtnClicked} updateList={updateList} />);
 	}
 
 	return (
@@ -75,7 +89,7 @@ function App() {
 			</Navbar>
 			<div className='todo-container'>
 				{searchText && !listToShow.length && <NoListMsg>{noSearchResult}</NoListMsg>}
-				{!mainList.length && <NoListMsg>{noTodoList}</NoListMsg>}
+				{!listToShow.length && <NoListMsg>{noTodoList}</NoListMsg>}
 				{getListToShow()}
 			</div>
 			<Icon name='add' customClass='add-icon' clickEvent={addNewTask} />

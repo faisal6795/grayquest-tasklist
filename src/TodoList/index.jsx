@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CheckItem from '../CheckItem';
 import { Container, Body, EditTitle, Title, AddItem, ButtonWrapper } from './TodoList.styles';
 import Icon from '../Icon';
 
-export default function TodoList({ id, todoList, title, saveClicked, deleteClicked }) {
+export default function TodoList({ id, todoList, title, saveClicked, deleteClicked, updateList }) {
 
     const [todoItemList, setTodoItemList] = useState(todoList);
-    const [isListEditing, setListEditing] = useState(false);
+    const [isListEditing, setListEditing] = useState(title === '' && todoList[0].text === '');
     const [todoTitle, setTodoTitle] = useState(title);
-    const dispatch = useDispatch();
 
     useEffect(() => {
-        title === '' && todoList.length === 1 && todoList[0].text === '' && setListEditing(true);
-    }, []);
+        setTodoItemList(todoList)
+    }, [todoList]);
 
     function onItemChecked(index, checked) {
         const temp = todoItemList;
         temp[index].checked = checked;
         setTodoItemList(temp);
-        dispatch({
-            type: 'UPDATE_LIST',
-            value: temp
-        });
+        if (!isListEditing) {
+            updateList({ id, title, todoList: temp });
+        }
     }
 
     function inputChanged(index, event) {
@@ -102,4 +99,5 @@ TodoList.propTypes = {
     title: PropTypes.string,
     saveClicked: PropTypes.func,
     deleteClicked: PropTypes.func,
+    updateList: PropTypes.func,
 }

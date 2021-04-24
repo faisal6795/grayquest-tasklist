@@ -8,12 +8,15 @@ export default function CheckItem({ isEdit, checked, text, onItemChecked, inputC
 
     const id = uuid();
     const [value, setValue] = useState(text);
+    const [checkedValue, setCheckedValue] = useState(checked);
 
     useEffect(() => {
         setValue(text);
-    }, [text]);
+        setCheckedValue(checked);
+    }, [text, checked]);
 
     function onCheckboxChanged(event) {
+        setCheckedValue(event.target.checked);
         onItemChecked(event.target.checked);
     }
 
@@ -28,7 +31,7 @@ export default function CheckItem({ isEdit, checked, text, onItemChecked, inputC
 
     return (
         <CheckItemWrapper>
-            <CheckBox id={id} type='checkbox' onChange={onCheckboxChanged} checked={checked} />
+            <CheckBox id={id} type='checkbox' onChange={onCheckboxChanged} checked={checkedValue} />
             <CheckLabel htmlFor={id} className={isEdit ? 'hide-label' : ''}>{text}</CheckLabel>
             {isEdit && <EditInput type='text' placeholder='To do' onKeyUp={addNewItem} value={value} onChange={onInputChanged} autoFocus />}
             {isEdit && <Icon clickEvent={removeItem} customClass='remove-icon hover-effect' name='clear' smallBtn />}
