@@ -34,10 +34,6 @@ export const Wrapper = styled.div`
         }
     }
 
-    .search-icon {
-        color: ${COLORS.primary};
-    }
-
     .add-icon {
         width: 3rem;
         height: 3rem;
@@ -51,20 +47,10 @@ export const Wrapper = styled.div`
         bottom: 3rem;
     }
 
-    .clear-icon {
-        padding: 8px;
-        margin: 6px;
-        font-size: 1.25rem;
-        float: right;
-        cursor: pointer;
-        color: ${COLORS.primary};
-        background-color: transparent;
-    }
-
     .hover-effect {
         position: relative;
 
-        &:hover::before {
+        &:hover::before, &:focus::before {
             width: 100%;
             height: 100%;
         }
@@ -94,6 +80,10 @@ export const Heading = styled.h1`
     span {
         margin-left: 1rem;
     }
+
+    img {
+        -webkit-user-drag: none;
+    }
 `;
 
 export const Navbar = styled.nav`
@@ -113,8 +103,26 @@ export const SearchBar = styled.div`
     height: 3rem;
     min-width: 100%;
     background-color: #fff;
-    border-radius: 0.75rem;
+    border-radius: 1.5rem;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+
+    .search-icon {
+        color: ${COLORS.primary};
+    }
+
+    .clear-icon {
+        height: 2.25rem;
+        margin: 6px;
+        font-size: 1.25rem;
+        float: right;
+        cursor: pointer;
+        color: ${COLORS.primary};
+        background-color: transparent;
+
+        span {
+            padding: 6px;
+        }
+    }
 
     @media screen and (min-width: 768px) {
         min-width: 20rem;

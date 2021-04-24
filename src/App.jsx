@@ -25,8 +25,7 @@ function App() {
 			title: '',
 			todoList: [{ checked: false, text: '' }]
 		};
-		dispatch({ type: 'ADD_LIST', value: temp });
-		dispatch({ type: 'COUNTER', value: counter + 1 });
+		setListToShow([...listToShow, temp]);
 	}
 
 	function onInputChange(event) {
@@ -35,13 +34,33 @@ function App() {
 		setListToShow(mainList.filter(list => list.todoList.some(item => item.text.includes(text))));
 	}
 
+	function saveBtnClicked(id, title, todoList) {
+		const temp = { id, title, todoList };
+		if (id > counter) {
+			dispatch({ type: 'ADD_LIST', value: temp });
+			dispatch({ type: 'COUNTER', value: id });
+		} else {
+			dispatch({
+				type: 'UPDATE_LIST',
+				value: temp
+			});
+		}
+	}
+
+	function deleteBtnClicked(id) {
+		dispatch({
+			type: 'DELETE_LIST',
+			value: id
+		});
+	}
+
 	function clearText() {
 		setSearchText('');
 		setListToShow(mainList);
 	}
 
 	function getListToShow() {
-		return listToShow.map(item => <TodoList key={item.id} id={item.id} title={item.title} todoList={item.todoList} />);
+		return listToShow.map(item => <TodoList key={item.id} id={item.id} title={item.title} todoList={item.todoList} saveClicked={saveBtnClicked} deleteClicked={deleteBtnClicked} />);
 	}
 
 	return (

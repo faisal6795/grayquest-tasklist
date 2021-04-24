@@ -3,7 +3,7 @@ import { COLORS } from '../App.styles';
 
 export const Container = styled.div`
     position: relative;
-    padding: 1.25rem 1.25rem 0.75rem;
+    padding: 1.25rem;
     border-radius: 0.5rem;
     background-color: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
@@ -17,16 +17,10 @@ export const Container = styled.div`
     }
 
     .edit-icon, .delete-icon {
-        float: right;
         cursor: pointer;
         color: ${COLORS.primary};
         border: 1px solid ${COLORS.gray};
         border-radius: 50%;
-        margin-left: 0.5rem;
-    }
-
-    .delete-icon {
-        margin-right: -0.5rem;
     }
 
     .add-icon-small {
@@ -82,4 +76,10 @@ export const AddItem = styled.button`
         line-height: 1;
         color: ${COLORS.primary};
     }
+`;
+
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
 `;
