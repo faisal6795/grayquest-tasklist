@@ -1,6 +1,31 @@
 import styled from 'styled-components';
 import { COLORS } from '../App.styles';
 
+export const CheckItemWrapper = styled.div`
+    display: flex;
+    padding: 0.25rem 0;
+
+    :hover .remove-icon {
+        opacity: 0.8;
+    }
+    
+    .remove-icon {
+        border-radius: 50%;
+        cursor: pointer;
+        height: 1.5rem;
+        width: 1.5rem;
+        opacity: 0;
+
+        span {
+            padding: 4px;
+        }
+
+        @media screen and (max-width: 480px) {
+            opacity: 0.8;
+        }
+    }
+`;
+
 export const CheckBox = styled.input`
     margin: 0;
     cursor: pointer;

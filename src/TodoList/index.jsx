@@ -16,7 +16,7 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
         title === '' && todoList.length === 1 && todoList[0].text === '' && setListEditing(true);
     }, []);
 
-    function itemChecked(index, checked) {
+    function onItemChecked(index, checked) {
         const temp = todoItemList;
         temp[index].checked = checked;
         setTodoItemList(temp);
@@ -45,8 +45,15 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
     }
 
     function addItem() {
+        if (todoItemList.some(item => item.text === '')) return;
         const temp = { checked: false, text: '' };
         setTodoItemList([...todoItemList, temp]);
+    }
+
+    function removeItem(index) {
+        const temp = JSON.parse(JSON.stringify(todoItemList));
+        temp.splice(index, 1);
+        setTodoItemList(temp);
     }
 
     function doneBtnClicked() {
@@ -62,8 +69,9 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
             isEdit={isListEditing}
             checked={item.checked}
             addNewList={addItem}
-            itemChecked={(checked) => { itemChecked(index, checked) }}
+            onItemChecked={(checked) => { onItemChecked(index, checked) }}
             inputChanged={(event) => inputChanged(index, event)}
+            removeItem={() => removeItem(index)}
         />);
     }
 

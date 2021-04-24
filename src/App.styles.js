@@ -5,6 +5,7 @@ export const COLORS = {
     secondary: '',
     accent: '#02CA9F',
     gray: '#CCC',
+    lightGray: '#DDD',
     darkGray: '#727272',
 }
 
@@ -45,6 +46,10 @@ export const Wrapper = styled.div`
         position: fixed;
         right: 15%;
         bottom: 3rem;
+        
+        @media screen and (max-width: 480px) {
+            right: 2rem;
+        }
     }
 
     .hover-effect {

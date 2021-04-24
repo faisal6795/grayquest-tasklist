@@ -6,11 +6,15 @@ export const Container = styled.div`
     padding: 1.25rem;
     border-radius: 0.5rem;
     background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    border: 1px solid ${COLORS.lightGray};
     margin-bottom: 1rem;
     display: inline-block;
     vertical-align: top;
     width: 100%;
+
+    :hover {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    }
 
     &.hide {
         display: none;
@@ -34,10 +38,12 @@ export const Container = styled.div`
         border-radius: 50%;
         background-color: ${COLORS.primary};
         color: #fff;
-        box-shadow: 0 3px 6px rgb(0 0 0 / 25%);
         cursor: pointer;
         float: right;
         font-weight: bold;
+        position: relative;
+        margin-top: 0.5rem;
+        border: 1px solid ${COLORS.primary};
     }
 `;
 
@@ -82,4 +88,5 @@ export const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
+    margin-top: 0.5rem;
 `;
