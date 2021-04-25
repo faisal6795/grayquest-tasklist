@@ -11,6 +11,7 @@ function App() {
 	const counter = useSelector(state => state.counter);
 	const [searchText, setSearchText] = useState('');
 	const [listToShow, setListToShow] = useState(mainList);
+	const [showAddBtn, setShowAddBtn] = useState(true);
 	const dispatch = useDispatch();
 	const noSearchResult = 'No search results found.';
 	const noTodoList = 'Click the + icon to add your first To Do List.';
@@ -26,6 +27,7 @@ function App() {
 			todoList: [{ checked: false, text: '' }]
 		};
 		setListToShow([...listToShow, temp]);
+		setShowAddBtn(false);
 	}
 
 	function onInputChange(event) {
@@ -36,11 +38,13 @@ function App() {
 
 	function saveBtnClicked(id, title, todoList) {
 		const temp = { id, title, todoList };
-		if (title === "" && !todoList.length) {
+		if (title.trim() === "" && !todoList.length) {
 			setListToShow(mainList);
+			if (id <= counter) deleteBtnClicked(id);
 			return;
 		}
 		if (id > counter) {
+			temp.todoList = sortList(temp.todoList);
 			dispatch({ type: 'ADD_LIST', value: temp });
 			dispatch({ type: 'COUNTER', value: id });
 		} else {
@@ -48,10 +52,14 @@ function App() {
 		}
 	}
 
+	function sortList(currentList) {
+		const uncheckedList = currentList.filter(item => !item.checked),
+			checkedList = currentList.filter(item => item.checked);
+		return [...uncheckedList, ...checkedList];
+	}
+
 	function updateList({ id, title, todoList }) {
-		const uncheckedList = todoList.filter(item => !item.checked),
-			checkedList = todoList.filter(item => item.checked),
-			updatedList = [...uncheckedList, ...checkedList],
+		const updatedList = sortList(todoList),
 			temp = { id, title, todoList: updatedList };
 
 		setListToShow(mainList.map(item => item.id === temp.id ? temp : item));
@@ -73,8 +81,12 @@ function App() {
 		setListToShow(mainList);
 	}
 
+	function setEditing(isEditing) {
+		setShowAddBtn(!isEditing);
+	}
+
 	function getListToShow() {
-		return listToShow.map(item => <TodoList key={item.id} id={item.id} title={item.title} todoList={item.todoList} saveClicked={saveBtnClicked} deleteClicked={deleteBtnClicked} updateList={updateList} />);
+		return listToShow.map(item => <TodoList key={item.id} id={item.id} title={item.title} todoList={item.todoList} saveClicked={saveBtnClicked} deleteClicked={deleteBtnClicked} updateList={updateList} setEditing={setEditing} />);
 	}
 
 	return (
@@ -89,10 +101,10 @@ function App() {
 			</Navbar>
 			<div className='todo-container'>
 				{searchText && !listToShow.length && <NoListMsg>{noSearchResult}</NoListMsg>}
-				{!listToShow.length && <NoListMsg>{noTodoList}</NoListMsg>}
+				{!searchText && !listToShow.length && <NoListMsg>{noTodoList}</NoListMsg>}
 				{getListToShow()}
 			</div>
-			<Icon name='add' customClass='add-icon' clickEvent={addNewTask} />
+			{showAddBtn && !searchText && <Icon name='add' customClass='add-icon' clickEvent={addNewTask} />}
 		</Wrapper>
 	);
 }

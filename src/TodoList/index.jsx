@@ -4,7 +4,7 @@ import CheckItem from '../CheckItem';
 import { Container, Body, EditTitle, Title, AddItem, ButtonWrapper } from './TodoList.styles';
 import Icon from '../Icon';
 
-export default function TodoList({ id, todoList, title, saveClicked, deleteClicked, updateList }) {
+export default function TodoList({ id, todoList, title, saveClicked, deleteClicked, updateList, setEditing }) {
 
     const [todoItemList, setTodoItemList] = useState(todoList);
     const [isListEditing, setListEditing] = useState(title === '' && todoList[0].text === '');
@@ -35,6 +35,7 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
 
     function editBtnClicked() {
         setListEditing(true);
+        setEditing(true);
     }
 
     function deleteBtnClicked() {
@@ -55,7 +56,8 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
 
     function doneBtnClicked() {
         setListEditing(false);
-        const updatedTodoList = todoItemList.filter(item => item.text !== '');
+        setEditing(false);
+        const updatedTodoList = todoItemList.filter(item => item.text.trim() !== '');
         setTodoItemList(updatedTodoList);
         saveClicked(id, todoTitle, updatedTodoList);
     }
@@ -100,4 +102,5 @@ TodoList.propTypes = {
     saveClicked: PropTypes.func,
     deleteClicked: PropTypes.func,
     updateList: PropTypes.func,
+    setEditing: PropTypes.func,
 }
