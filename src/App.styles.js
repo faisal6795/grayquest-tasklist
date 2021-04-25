@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const COLORS = {
     primary: '#017acb',
-    secondary: '',
     accent: '#02CA9F',
     gray: '#CCC',
     lightGray: '#DDD',
