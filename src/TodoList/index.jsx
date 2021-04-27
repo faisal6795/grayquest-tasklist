@@ -89,7 +89,7 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
             </Body>
             {!isListEditing && <ButtonWrapper>
                 <Icon name='edit' customClass='edit-icon hover-effect' smallBtn clickEvent={editBtnClicked} />
-                <Icon name='delete_outline' customClass='delete-icon hover-effect' smallBtn clickEvent={deleteBtnClicked} />
+                <Icon name='delete' customClass='delete-icon hover-effect' smallBtn clickEvent={deleteBtnClicked} />
             </ButtonWrapper>}
         </Container>
     );
@@ -97,7 +97,7 @@ export default function TodoList({ id, todoList, title, saveClicked, deleteClick
 
 TodoList.propTypes = {
     id: PropTypes.number,
-    todoList: PropTypes.array,
+    todoList: PropTypes.arrayOf(PropTypes.object),
     title: PropTypes.string,
     saveClicked: PropTypes.func,
     deleteClicked: PropTypes.func,

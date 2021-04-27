@@ -7,10 +7,6 @@ export const Container = styled.div`
     border-radius: 0.5rem;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
-    margin-bottom: 1rem;
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
 
     &.hide {
         display: none;

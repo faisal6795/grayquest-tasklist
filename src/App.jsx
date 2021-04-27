@@ -4,6 +4,7 @@ import TodoList from './TodoList';
 import { Wrapper, Navbar, SearchBar, SearchInput, NoListMsg, Heading } from './App.styles';
 import logo from './assets/logo.svg';
 import Icon from './Icon';
+import Masonry from './Masonry';
 
 function App() {
 
@@ -92,11 +93,9 @@ function App() {
 					{searchText && <Icon name='clear' customClass='clear-icon hover-effect' clickEvent={clearText} />}
 				</SearchBar>}
 			</Navbar>
-			<div className='todo-container'>
-				{searchText && !listToShow.length && <NoListMsg>{noSearchResult}</NoListMsg>}
-				{!searchText && !listToShow.length && <NoListMsg>{noTodoList}</NoListMsg>}
-				{getListToShow()}
-			</div>
+			<Masonry children={getListToShow()} gap={16} />
+			{searchText && !listToShow.length && <NoListMsg>{noSearchResult}</NoListMsg>}
+			{!searchText && !listToShow.length && <NoListMsg>{noTodoList}</NoListMsg>}
 			{showAddBtn && !searchText && <Icon name='add' customClass='add-icon' clickEvent={addNewTask} />}
 		</Wrapper>
 	);

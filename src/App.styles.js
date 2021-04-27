@@ -18,22 +18,6 @@ export const Wrapper = styled.div`
         padding: 2rem 2rem 6rem;
     }
 
-    .todo-container {
-        columns: 4;
-
-        @media screen and (max-width: 1024px) {
-            columns: 3;
-        }
-        
-        @media screen and (max-width: 768px) {
-            columns: 2;
-        }
-        
-        @media screen and (max-width: 480px) {
-            columns: 1;
-        }
-    }
-
     .add-icon {
         width: 3rem;
         height: 3rem;
