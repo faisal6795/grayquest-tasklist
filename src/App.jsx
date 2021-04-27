@@ -33,7 +33,7 @@ function App() {
 	function onInputChange(event) {
 		const text = event.target.value;
 		setSearchText(text);
-		setListToShow(mainList.filter(list => list.todoList.some(item => item.text.includes(text))));
+		setListToShow(mainList.filter(list => list.todoList.some(item => item.text.toLowerCase().includes(text.toLowerCase()))));
 	}
 
 	function saveBtnClicked(id, title, todoList) {
@@ -44,7 +44,6 @@ function App() {
 			return;
 		}
 		if (id > counter) {
-			temp.todoList = sortList(temp.todoList);
 			dispatch({ type: 'ADD_LIST', value: temp });
 			dispatch({ type: 'COUNTER', value: id });
 		} else {
@@ -52,15 +51,8 @@ function App() {
 		}
 	}
 
-	function sortList(currentList) {
-		const uncheckedList = currentList.filter(item => !item.checked),
-			checkedList = currentList.filter(item => item.checked);
-		return [...uncheckedList, ...checkedList];
-	}
-
 	function updateList({ id, title, todoList }) {
-		const updatedList = sortList(todoList),
-			temp = { id, title, todoList: updatedList };
+		const temp = { id, title, todoList };
 
 		setListToShow(mainList.map(item => item.id === temp.id ? temp : item));
 		dispatch({
@@ -74,6 +66,7 @@ function App() {
 			type: 'DELETE_LIST',
 			value: id
 		});
+		setShowAddBtn(true);
 	}
 
 	function clearText() {

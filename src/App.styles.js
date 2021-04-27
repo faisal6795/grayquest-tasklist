@@ -95,10 +95,10 @@ export const Navbar = styled.nav`
     flex-direction: column;
     margin-bottom: 2rem;
     gap: 1rem;
+    align-items: center;
 
     @media screen and (min-width: 768px) {
         justify-content: space-between;
-        align-items: center;
         flex-direction: row;
     }
 `;
@@ -106,9 +106,8 @@ export const Navbar = styled.nav`
 export const SearchBar = styled.div`
     height: 3rem;
     min-width: 100%;
-    background-color: #fff;
+    background-color: #f1f2f4;
     border-radius: 1.5rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 
     .search-icon {
         color: ${COLORS.primary};
@@ -141,6 +140,7 @@ export const SearchInput = styled.input`
     outline: 0;
     border: 0;
     vertical-align: top;
+    background-color: inherit;
 `;
 
 export const NoListMsg = styled.p`

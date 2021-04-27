@@ -6,15 +6,11 @@ export const Container = styled.div`
     padding: 1.25rem;
     border-radius: 0.5rem;
     background-color: #fff;
-    border: 1px solid ${COLORS.lightGray};
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
     margin-bottom: 1rem;
     display: inline-block;
     vertical-align: top;
     width: 100%;
-
-    :hover {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
-    }
 
     &.hide {
         display: none;

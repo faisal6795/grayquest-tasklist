@@ -31,6 +31,7 @@ export const CheckBox = styled.input`
     cursor: pointer;
     width: 0;
     height: 0;
+    opacity: 0;
 
     :checked~label {
         text-decoration: line-through;
